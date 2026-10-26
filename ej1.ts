@@ -27,8 +27,7 @@ class Producto {
   }
 
   //Método venderUnidades(cantidad: number): si hayStock(cantidad) es true, descuenta del stock; si no, no vende nada
-  // (decidí vos si avisa con un mensaje o lanza un Error — cualquiera de las dos es válida, pero justificalo).
-  venderUnidades(cantidad: number) {
+  venderUnidades(cantidad: number): void {
     if (this.hayStock(cantidad)) {
       this.stock = this.stock - cantidad;
     } else {
