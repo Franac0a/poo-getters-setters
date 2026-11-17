@@ -5,7 +5,8 @@ class Persona {
   private _email = "";
 
   constructor(dni: string, nombre: string, edad: number, email: string) {
-    ((this.dni = dni), (this.nombre = nombre));
+    this.dni = dni;
+    this.nombre = nombre;
 
     this.edad = edad;
     this.email = email;
@@ -23,7 +24,7 @@ class Persona {
   }
 
   get email() {
-    return this.email;
+    return this._email;
   }
 
   set email(valor: string) {
@@ -45,3 +46,19 @@ class Persona {
 const persona1 = new Persona("46395379", "Facundo", 18, "facu@gmail.com");
 
 console.log(persona1.datosPublicos);
+console.log("email:", persona1.email);
+
+// Los setters validan los datos antes de guardarlos.
+try {
+  persona1.edad = 150;
+} catch (error) {
+  console.log("Error:", (error as Error).message);
+}
+
+try {
+  persona1.email = "correo-invalido";
+} catch (error) {
+  console.log("Error:", (error as Error).message);
+}
+
+console.log("edad sin cambios:", persona1.edad, "| email sin cambios:", persona1.email);

@@ -12,7 +12,7 @@ export class Empleado {
   }
 
   describir(): string {
-    return `${this.nombre} (${this.antiguedad} años) - sueldo $${this.calcularSueldo()}`;
+    return `${this.nombre} (${this.antiguedad} años) — sueldo: $${this.calcularSueldo()}`;
   }
 }
 

@@ -18,7 +18,7 @@ class Producto {
 
   // Método describir() que devuelva un string tipo "Teclado ($electrónica): $10000 — 5 unidades".
   describir(): string {
-    return `${this.nombre} [${this.categoria}]: $${this.precio} (${this.stock} unidades)`;
+    return `${this.nombre} (${this.categoria}): $${this.precio} — ${this.stock} unidades`;
   }
 
   //Método hayStock(cantidad: number): boolean que diga si se puede vender esa cantidad sin quedar en negativo.
@@ -27,11 +27,16 @@ class Producto {
   }
 
   //Método venderUnidades(cantidad: number): si hayStock(cantidad) es true, descuenta del stock; si no, no vende nada
+  // Decisión: avisa con un mensaje en vez de lanzar un Error. Quedarse sin stock es una
+  // situación normal del negocio (no un error del programa), así que no se corta la ejecución:
+  // se informa y el stock queda igual.
   venderUnidades(cantidad: number): void {
     if (this.hayStock(cantidad)) {
       this.stock = this.stock - cantidad;
     } else {
-      throw new Error("No hay stock suficiente");
+      console.log(
+        `No se pudo vender ${cantidad} unidades de ${this.nombre}: solo hay ${this.stock} en stock.`,
+      );
     }
   }
 
@@ -50,5 +55,8 @@ const nuevoProducto = new Producto(
 
 console.log(nuevoProducto.describir());
 console.log(nuevoProducto.aplicarDescuento(20));
+console.log(nuevoProducto.describir()); // el descuento no cambia el precio original
 nuevoProducto.venderUnidades(3);
+console.log(nuevoProducto.describir());
+nuevoProducto.venderUnidades(50); // no hay stock suficiente: no vende nada
 console.log(nuevoProducto.describir());
